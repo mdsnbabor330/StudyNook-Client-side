@@ -7,6 +7,8 @@ import Link from "next/link";
 const Navbar = () => {
   const [theme, setTheme] = useState("light");
 
+  
+
   const navLinks = (
     <>
       <Navlink href="/">Home</Navlink>
@@ -18,8 +20,8 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="sticky w-full z-50 bg-base-100 shadow-md p-2">
-      <div className="navbar max-w-300 mx-auto">
+    <nav className="fixed w-full z-50 bg-[#F7F4EF] shadow-2xl p-2">
+      <div className="navbar max-w-310 mx-auto">
         <div className="navbar-start">
           <div className="dropdown lg:hidden">
             <div
@@ -51,7 +53,7 @@ const Navbar = () => {
           </div>
           <Link
             href="/"
-            className="text-accent text-2xl sm:text-3xl font-bold "
+            className="text-primary text-2xl sm:text-3xl font-bold "
           >
             StudyNook
           </Link>
@@ -59,21 +61,21 @@ const Navbar = () => {
 
         <div className="navbar-center hidden lg:flex gap-5">{navLinks}</div>
 
-        <div className="navbar-end gap-2 sm:gap-5">
+        <div className="navbar-end gap-2 ">
           <Link
             href="/login"
-            className="text-[#1C3557] font-medium text-sm sm:text-base"
+            className="text-primary font-bold py-2 px-4 rounded-full text-sm sm:text-base"
           >
-            Login
+            Sign In
           </Link>
           <Link
             href="/signup"
-            className="text-[#1C3557] font-medium text-sm sm:text-base"
+            className="text-white bg-primary py-2 px-4 rounded-full font-medium text-sm sm:text-base"
           >
             Register
           </Link>
 
-          <button
+          {/* <button
             aria-label="Toggle Theme"
             className="btn btn-sm p-0 sm:btn-md bg-white border btn-circle transition delay-180"
           >
@@ -82,9 +84,9 @@ const Navbar = () => {
             ) : (
               <FaRegSun size={18} className="transition delay-200" />
             )}
-          </button>
+          </button> */}
 
-          <div className="dropdown dropdown-end text-black">
+          {/* <div className="dropdown dropdown-end text-black">
             <div
               tabIndex={0}
               role="button"
@@ -106,7 +108,7 @@ const Navbar = () => {
                 <a>Logout</a>
               </li>
             </ul>
-          </div>
+          </div> */}
         </div>
       </div>
     </nav>

@@ -1,5 +1,5 @@
 "use client";
-import LoginImage from "@/assets/login.jpg";
+import SignUpImage from "@/assets/login.jpg";
 
 import {
   Button,
@@ -16,14 +16,22 @@ import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 
 const SignUp = () => {
+
+  const handleSubmit=(e)=>{
+    e.preventDefualt();
+    const formdata = new FormData(e.target);
+    const data = Object.fromEntries(formdata.entries());
+    console.log(data);
+  }
+
   return (
-    <div className="max-w-300 mx-auto mt-10">
+    <div className="max-w-300 mx-auto mt-25">
       <div className="flex items-center justify-center gap-4 border rounded-lg shadow-md overflow-hidden">
         <div className="p-6 w-120">
           <div className="max-w-md w-full mx-auto space-y-6">
             {/* Header */}
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-accent tracking-tight">
+              <h1 className="text-2xl sm:text-3xl font-bold text-primary tracking-tight">
                 Create an Account
               </h1>
               <p className="text-sm text-gray-600 mt-1">
@@ -33,14 +41,14 @@ const SignUp = () => {
             {/* Social Login Buttons */}
             <button
               type="button"
-              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl hover:border bg-white text-xs font-semibold text-[#1A1209] hover:border-accent/40 transition-all shadow-sm active:scale-[0.98] cursor-pointer"
+              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl hover:border bg-white text-xs font-semibold text-[#1A1209] hover:border-primary/40 transition-all shadow-sm active:scale-[0.98] cursor-pointer"
             >
               <FcGoogle className="text-lg " />
               <span>Continue with Google</span>
             </button>
           </div>
           <hr className="my-5" />
-          <Form
+          <Form onSubmit={handleSubmit}
             className="flex flex-col gap-4 "
             render={(props) => <form {...props} data-custom="foo" />}
           >
@@ -110,32 +118,31 @@ const SignUp = () => {
             <div className="flex gap-2">
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-full bg-accent  text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all active:scale-[0.99] cursor-pointer mt-2"
+                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-full bg-primary  text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all active:scale-[0.99] cursor-pointer mt-2"
               >
-                <span>Sign Up</span>
-                <FaArrowRight className="text-xs" />
+                <span>Register</span>
               </button>
             </div>
             <p className="text-center text-xs text-[#7A6B52] pt-2">
               Already have an account?{" "}
               <Link
                 href="/login"
-                className="font-bold text-accent hover:underline underline-offset-2"
+                className="font-bold text-primary hover:underline underline-offset-2"
               >
-                Login here
+                Sign in here
               </Link>
             </p>
           </Form>
         </div>
         <div className="relative">
           <Image
-            src={LoginImage}
-            alt="Login"
+            src={SignUpImage}
+            alt="Sign Up"
             width={420}
             height={450}
             className="mx-auto"
           />
-          <div className="absolute w-full h-full inset-0 bg-accent/90 flex flex-col justify-center p-3">
+          <div className="absolute w-full h-full inset-0 bg-primary/90 flex flex-col justify-center p-3">
             <div className="relative z-10 space-y-4 my-auto">
               <h2 className="text-3xl font-bold leading-tight tracking-tight text-white drop-shadow-sm">
                 Find Your Ideal Study Haven
