@@ -1,4 +1,6 @@
+import ExploreRooms from "@/components/ExploreRooms";
 import Hero from "@/components/Hero";
+import { Explora } from "next/font/google";
 
 export const metadata = {
   title: "StudyNook - Home",
@@ -9,6 +11,7 @@ export default function Home() {
   return (
     < >
      <Hero/>
+     <ExploreRooms/>
     </>
   );
 }

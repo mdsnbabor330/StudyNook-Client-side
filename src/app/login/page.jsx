@@ -25,7 +25,7 @@ const SignIn = () => {
   }
 
   return (
-    <div className="max-w-300 mx-auto mt-25">
+    <div className="max-w-300 mx-auto mt-30">
       <div className="flex items-center justify-center gap-4 border rounded-lg shadow-md overflow-hidden">
         <div className="relative">
           <Image
@@ -113,8 +113,8 @@ const SignIn = () => {
                 if (!/[A-Z]/.test(value)) {
                   return "Password must contain at least one uppercase letter";
                 }
-                if (!/[0-9]/.test(value)) {
-                  return "Password must contain at least one number";
+                if (!/[a-z]/.test(value)) {
+                  return "Password must contain at least one lowercase letter";
                 }
                 return null;
               }}

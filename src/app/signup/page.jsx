@@ -17,15 +17,15 @@ import Link from "next/link";
 
 const SignUp = () => {
 
-  const handleSubmit=(e)=>{
-    e.preventDefualt();
+  const handleSubmit= async(e)=>{
+    e.preventDefault();
     const formdata = new FormData(e.target);
     const data = Object.fromEntries(formdata.entries());
     console.log(data);
   }
 
   return (
-    <div className="max-w-300 mx-auto mt-25">
+    <div className="max-w-300 mx-auto mt-30">
       <div className="flex items-center justify-center gap-4 border rounded-lg shadow-md overflow-hidden">
         <div className="p-6 w-120">
           <div className="max-w-md w-full mx-auto space-y-6">
