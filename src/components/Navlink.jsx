@@ -7,7 +7,7 @@ const Navlink = ({ href, children }) => {
 
   return (
     <div>
-      <a href={href} className={pathname === href ? "text-[#1C3557] font-medium" : "text-black text-[16px]"}>
+      <a href={href} className={pathname === href ? "text-accent font-bold" : "text-black font-medium hover:text-accent transition-all"}>
         {children}
       </a>
     </div>
