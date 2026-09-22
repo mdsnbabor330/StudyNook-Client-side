@@ -1,16 +1,23 @@
 "use client";
 
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const Navlink = ({ href, children }) => {
   const pathname = usePathname();
+  const isActive = pathname === href;
 
   return (
-    <div>
-      <a href={href} className={pathname === href ? "text-accent font-bold" : "text-black font-medium hover:text-accent transition-all"}>
-        {children}
-      </a>
-    </div>
+    <Link
+      href={href}
+      className={
+        isActive
+          ? "text-primary font-bold border-b-2 border-primary py-1 transition-all"
+          : "text-foreground/80 font-medium hover:text-primary py-1 transition-all"
+      }
+    >
+      {children}
+    </Link>
   );
 };
 

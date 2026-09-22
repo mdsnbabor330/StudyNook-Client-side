@@ -1,27 +1,26 @@
 import RoomCard from "@/UI/RoomCard";
-import Link from "next/link";
 import React from "react";
 
-const ExploreRooms = async () => {
+const Rooms = async () => {
   let rooms = [];
   try {
-    const res = await fetch("http://localhost:3003/explore-rooms", {
+    const res = await fetch("http://localhost:3003/rooms", {
       next: { revalidate: 60 },
     });
     if (res.ok) {
       rooms = await res.json();
     }
   } catch (err) {
-    console.error("Failed to fetch rooms:", err);
+    console.error("Error fetching rooms:", err);
   }
 
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 pt-24 sm:pt-28">
       <div className="text-center max-w-2xl mx-auto space-y-3">
         <p className="text-xs sm:text-sm font-semibold tracking-wider text-[#2D6A4F] uppercase">
-          OUR SELECTION
+          OUR COLLECTION
         </p>
-        <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#1C3557]">
+        <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-primary">
           Explore Popular Rooms
         </h2>
         <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
@@ -37,23 +36,12 @@ const ExploreRooms = async () => {
           ))}
         </div>
       ) : (
-        <div className="mt-12 text-center max-w-md mx-auto bg-card border border-border shadow-sm p-8 rounded-2xl text-muted-foreground">
+        <div className="mt-12 text-center max-w-md mx-auto bg-card border border-border shadow-xs p-8 sm:p-10 rounded-2xl text-muted-foreground">
           <p>No rooms available at the moment.</p>
         </div>
       )}
-
-      <div className="flex justify-between items-center gap-4 mt-12">
-        <hr className="flex-1 border-border" />
-        <Link
-          href="/rooms"
-          className="font-semibold text-primary hover:text-primary/80 transition-colors text-sm sm:text-base"
-        >
-          View All Rooms →
-        </Link>
-        <hr className="flex-1 border-border" />
-      </div>
-    </section>
+    </div>
   );
 };
 
-export default ExploreRooms;
+export default Rooms;
