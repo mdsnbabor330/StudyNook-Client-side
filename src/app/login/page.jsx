@@ -13,13 +13,35 @@ import Image from "next/image";
 import { FaCheckCircle } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
+import toast from "react-hot-toast";
 
 const SignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formdata = new FormData(e.target);
-    const data = Object.fromEntries(formdata.entries());
-    console.log("Sign in data:", data);
+    const user = Object.fromEntries(formdata.entries());
+    const { data, error } = await authClient.signIn.email({
+      email: user.email,
+      password: user.password,
+      rememberMe: true,
+      callbackURL: "/",
+    });
+    if (data) {
+      toast.success(`${user.name} Sign In Successfully`);
+      redirect("/");
+    }
+    if (error) {
+      toast.error(error.message);
+    }
+  };
+
+  const handleGoogle = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+    });
+    console.log(data);
   };
 
   return (
@@ -75,7 +97,7 @@ const SignIn = () => {
             </div>
 
             {/* Social Sign In */}
-            <button
+            <button onClick={handleGoogle}
               type="button"
               className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-xl border border-border bg-background hover:bg-secondary text-xs sm:text-sm font-semibold text-foreground transition-all shadow-xs active:scale-[0.98] cursor-pointer"
             >

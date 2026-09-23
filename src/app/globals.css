@@ -82,6 +82,34 @@ h3,
   font-family: 'DM Serif Display', serif;
 }
 
+/* 3D Hover Card Utility */
+.hover-3d {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  perspective: 1000px;
+}
+
+.hover-3d > :first-child {
+  grid-area: 1 / 1 / 4 / 4;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  transform-style: preserve-3d;
+}
+
+.hover-3d > div:not(:first-child) {
+  z-index: 10;
+}
+
+.hover-3d > div:nth-child(2):hover ~ :first-child { transform: perspective(1000px) rotateX(10deg) rotateY(-10deg) scale(1.02); }
+.hover-3d > div:nth-child(3):hover ~ :first-child { transform: perspective(1000px) rotateX(10deg) rotateY(0deg) scale(1.02); }
+.hover-3d > div:nth-child(4):hover ~ :first-child { transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.02); }
+.hover-3d > div:nth-child(5):hover ~ :first-child { transform: perspective(1000px) rotateX(0deg) rotateY(-10deg) scale(1.02); }
+.hover-3d > div:nth-child(6):hover ~ :first-child { transform: perspective(1000px) rotateX(0deg) rotateY(10deg) scale(1.02); }
+.hover-3d > div:nth-child(7):hover ~ :first-child { transform: perspective(1000px) rotateX(-10deg) rotateY(-10deg) scale(1.02); }
+.hover-3d > div:nth-child(8):hover ~ :first-child { transform: perspective(1000px) rotateX(-10deg) rotateY(0deg) scale(1.02); }
+.hover-3d > div:nth-child(9):hover ~ :first-child { transform: perspective(1000px) rotateX(-10deg) rotateY(10deg) scale(1.02); }
+
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;

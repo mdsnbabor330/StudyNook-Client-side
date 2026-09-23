@@ -3,15 +3,29 @@ import React from "react";
 import Navlink from "./Navlink";
 import Link from "next/link";
 import { FiBookOpen } from "react-icons/fi";
+import { authClient } from "@/lib/auth-client";
+import Image from "next/image";
+import { FaArrowDown, FaMoon, FaUserCircle } from "react-icons/fa";
+import { IoIosArrowDown } from "react-icons/io";
+import { redirect } from "next/navigation";
 
 const Navbar = () => {
+  const { data: session, isPending } = authClient.useSession();
+  const user = session?.user;
+
   const navLinks = (
     <>
       <Navlink href="/">Home</Navlink>
       <Navlink href="/rooms">Rooms</Navlink>
-      <Navlink href="/add-room">Add Room</Navlink>
-      <Navlink href="/my-bookings">My Bookings</Navlink>
-      <Navlink href="/my-listings">My Listings</Navlink>
+      <Navlink href="/add-room" className={user ? "block" : "hidden"}>
+        Add Room
+      </Navlink>
+      <Navlink href="/my-bookings" className={user ? "block" : "hidden"}>
+        My Bookings
+      </Navlink>
+      <Navlink href="/my-listings" className={user ? "block" : "hidden"}>
+        My Listings
+      </Navlink>
     </>
   );
 
@@ -63,20 +77,83 @@ const Navbar = () => {
         <div className="hidden lg:flex items-center gap-8">{navLinks}</div>
 
         {/* Action Buttons */}
-        <div className="flex items-center gap-2 sm:gap-3">
-          <Link
-            href="/login"
-            className="text-primary font-semibold px-3 sm:px-4 py-2 text-xs sm:text-sm rounded-full hover:bg-secondary transition-colors"
-          >
-            Sign In
-          </Link>
-          <Link
-            href="/signup"
-            className="text-primary-foreground bg-primary hover:bg-primary/90 px-4 sm:px-5 py-2 text-xs sm:text-sm rounded-full font-medium shadow-xs transition-colors"
-          >
-            Register
-          </Link>
-        </div>
+
+        {isPending ? (
+          <span>Loading...</span>
+        ) : user ? (
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="btn btn-circle btn-soft">
+              <FaMoon size={20} />
+            </div>
+
+            <div className="dropdown dropdown-end">
+              <div
+                className="flex items-center gap-2 px-2 py-1 rounded-md border-2 border-gray-200 bg-primary text-white shadow cursor-pointer"
+                tabIndex={0}
+                role="button"
+              >
+                <div className="btn btn-ghost bg-white btn-circle avatar border border-gray-700">
+                  {user?.image ? (
+                    <Image
+                      src={user?.image}
+                      alt={user.name}
+                      width={35}
+                      height={35}
+                      className="object-cover w-full h-full "
+                    />
+                  ) : (
+                    <FaUserCircle size={30} className="text-gray-400" />
+                  )}
+                </div>
+                <p className="font-bold">{user.name}</p>
+                <IoIosArrowDown />
+              </div>
+
+              <ul
+                tabIndex={-1}
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-60 p-2 shadow text-[16px] gap-3"
+              >
+                <Navlink href={"/profile"} className={"hover:border-l-2 hover:border-primary rounded-md pl-2"} >Profile</Navlink>
+
+                <Navlink href="/my-bookings" className={"hover:border-l-2 hover:border-primary rounded-md pl-2"}>My Bookings</Navlink>
+
+                <Navlink href="/my-listings" className={"hover:border-l-2 hover:border-primary rounded-md pl-2"}>My Listings</Navlink>
+
+                <button
+                  className="bg-primary text-white font-medium rounded-md 
+                text-[18px] text-center p-2 cursor-pointer hover:text-gold hover:font-bold  transition-all"
+                  onClick={async () => {
+                    await authClient.signOut({
+                      fetchOptions: {
+                        onSuccess: () => {
+                          window.location.reload();
+                          redirect("/login");
+                        },
+                      },
+                    });
+                  }}
+                >
+                  Log Out
+                </button>
+              </ul>
+            </div>
+          </div>
+        ) : (
+          <div className="flex items-center gap-2 sm:gap-3">
+            <Link
+              href="/login"
+              className="text-primary font-semibold px-3 sm:px-4 py-2 text-xs sm:text-sm rounded-full hover:bg-secondary transition-colors"
+            >
+              Sign In
+            </Link>
+            <Link
+              href="/signup"
+              className="text-primary-foreground bg-primary hover:bg-primary/90 px-4 sm:px-5 py-2 text-xs sm:text-sm rounded-full font-medium shadow-xs transition-colors"
+            >
+              Register
+            </Link>
+          </div>
+        )}
       </div>
     </nav>
   );

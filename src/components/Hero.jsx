@@ -29,12 +29,13 @@ const Hero = () => {
             </div>
 
             <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight sm:leading-tight">
-              Find Your <span className="text-[#D4A359]">Perfect</span> Study Room
+              Find Your <span className="text-[#D4A359]">Perfect</span> Study
+              Room
             </h1>
 
             <p className="text-sm sm:text-base text-slate-200 leading-relaxed max-w-xl mx-auto lg:mx-0">
-              Reserve quiet reading rooms, collaborative studios, and seminar halls —
-              all vetted, bookable in seconds, and ready when you are.
+              Reserve quiet reading rooms, collaborative studios, and seminar
+              halls — all vetted, bookable in seconds, and ready when you are.
             </p>
 
             {/* Action Buttons */}
@@ -56,16 +57,26 @@ const Hero = () => {
             {/* Stats */}
             <div className="pt-8 border-t border-white/15 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0">
               <div className="space-y-1">
-                <p className="text-xl sm:text-3xl font-bold text-[#D4A359]">200+</p>
+                <p className="text-xl sm:text-3xl font-bold text-[#D4A359]">
+                  200+
+                </p>
                 <p className="text-xs sm:text-sm text-slate-300">Study Rooms</p>
               </div>
               <div className="space-y-1">
-                <p className="text-xl sm:text-3xl font-bold text-[#D4A359]">4,800+</p>
-                <p className="text-xs sm:text-sm text-slate-300">Students Served</p>
+                <p className="text-xl sm:text-3xl font-bold text-[#D4A359]">
+                  4,800+
+                </p>
+                <p className="text-xs sm:text-sm text-slate-300">
+                  Students Served
+                </p>
               </div>
               <div className="space-y-1">
-                <p className="text-xl sm:text-3xl font-bold text-[#D4A359]">99%</p>
-                <p className="text-xs sm:text-sm text-slate-300">Satisfaction Rate</p>
+                <p className="text-xl sm:text-3xl font-bold text-[#D4A359]">
+                  99%
+                </p>
+                <p className="text-xs sm:text-sm text-slate-300">
+                  Satisfaction Rate
+                </p>
               </div>
             </div>
           </div>
@@ -73,15 +84,22 @@ const Hero = () => {
           {/* Right Image Showcase */}
           <div className="w-full lg:w-1/2 relative flex justify-center">
             <div className="relative w-full max-w-md sm:max-w-lg">
-              <div className="overflow-hidden rounded-2xl border-4 border-white/20 shadow-2xl">
-                <Image
-                  src={Herofg}
-                  alt="study room foreground"
-                  width={600}
-                  height={500}
-                  priority
-                  className="w-full h-auto object-cover"
-                />
+              {/* DaisyUI hover-3d wrapper */}
+              <div className="hover-3d">
+                {/* Content block: 1st child of hover-3d */}
+                <div className="overflow-hidden rounded-2xl border-4 border-white/20 shadow-2xl">
+                  <Image src={Herofg} alt="hero fg" width={600} height={500} priority className="w-full h-auto object-cover" />
+                </div>
+
+                {/* 8 empty divs as direct children of hover-3d for the 3D tilt effect */}
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
               </div>
 
               {/* Floating Instant Booking Badge */}
